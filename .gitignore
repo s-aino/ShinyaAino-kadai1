@@ -1,0 +1,3 @@
+# MySQL runtime data (do not track)
+ docker/mysql/data/
+ docker/mysql/data/**
