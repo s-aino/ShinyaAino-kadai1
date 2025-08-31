@@ -7,10 +7,10 @@
 **Dockerビルド**
 1. `git clone git@github.com:Estra-Coachtech/laravel-docker-template.git`
 2. DockerDesktopアプリを立ち上げる
-3. `docker-compose up -d --build`
+3. `docker compose up -d --build`
 
 **Laravel環境構築**
-1. `docker-compose exec php bash`
+1. `docker compose exec php bash`
 2. `composer install`
 3. 「.env.example」ファイルを コピーして「.env」を作成し、DBの設定を変更
 ``` ini
