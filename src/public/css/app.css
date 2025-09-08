@@ -1,0 +1,970 @@
+/* ===== Header ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.site-header .inner {
+    max-width: 1120px;
+    margin-inline: auto;
+    margin: 0 auto;
+    padding: 12px 16px;
+    /* 3列Grid：左(余白) / 中央(ブランド) / 右(アクション) */
+    display: flex;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+.site-header .brand {
+    grid-column: 2;
+    /* 真ん中の列に固定 */
+    justify-self: center;
+    /* セル内で中央 */
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: 46px;
+    line-height: 1;
+    color: #7b6754;
+    letter-spacing: .5px;
+}
+
+.site-header .brand a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-header .actions {
+    grid-column: 3;
+    /* 右の列に固定 */
+    justify-self: end;
+    /* 右寄せ */
+}
+
+/* 右上の薄ボタン（login など） */
+.actions .btn--ghost {
+    border: 1px solid #e7ded4;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: transparent;
+    color: #8b735a;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.actions .btn--ghost:hover {
+    opacity: .9;
+}
+
+/* ここまでヘッダーのこと*/
+
+/* ===== Theme colors ===== */
+:root {
+    --bg: #f3eee7;
+    /* ページのベージュ */
+    --panel: #ffffff;
+    /* パネルの白 */
+    --panel-border: #efe7de;
+    /* パネルの枠 */
+    --text: #6c5848;
+    /* 文字色 */
+    --muted: #9d8e80;
+    /* 補助テキスト */
+    --accent: #8b6f58;
+    /* 強調色（ボタン/見出し） */
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ページ見出し（Register 等） */
+.page-title {
+    text-align: center;
+    font-size: 26px;
+    margin: 28px 0 18px;
+    color: var(--accent);
+}
+
+/* メイン領域 */
+main {
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+/* 白いパネル（フォームの囲み） */
+.form-panel {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 28px;
+}
+
+/* Register のときは幅を少し狭める */
+.form-panel.form-narrow {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* フィールド */
+.field {
+    margin-bottom: 22px;
+}
+
+.field label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.field input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    background: #f8f3ee;
+    /* 入力欄の薄いグレー/ベージュ */
+    color: var(--text);
+}
+
+.field input::placeholder {
+    color: #b7a696;
+}
+
+/* エラーメッセージなど */
+.muted {
+    color: var(--muted);
+}
+
+/* ボタン */
+.btn-primary {
+    display: block;
+    margin: 16px auto 0;
+    padding: 10px 26px;
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    filter: brightness(.98);
+}
+
+/* フォームの見た目を当てる対象を限定する */
+.form-panel input[type="text"],
+.form-panel input[type="email"],
+.form-panel input[type="tel"],
+.form-panel input[type="password"],
+.form-panel select,
+.form-panel textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ede7df;
+    background: #f7f2ec;
+    border-radius: 8px;
+}
+
+/* ラジオ／チェックはデフォルトのまま */
+.form-panel input[type="radio"],
+.form-panel input[type="checkbox"] {
+    width: auto;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+/* フィールド間の余白を一定に */
+.form-panel .field {
+    margin-bottom: 18px;
+}
+
+.form-panel.form--narrow {
+    max-width: 720px;
+}
+
+.form-panel {
+    /* 共通 */
+}
+
+.band {
+    display: block;
+}
+
+/* ページ全体の横幅（共通レイアウト） */
+.site-header .inner {
+    /* 既にあればそれでOK */
+    max-width: 1120px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+}
+
+.actions {
+    margin-left: auto;
+}
+
+/* 右上の login / register を右寄せ */
+
+/* コンテンツ領域自体を中央に（main, .band どちらでもOK） */
+main,
+.band,
+.site-main {
+    max-width: 1120px;
+    margin-inline: auto;
+    /* ← 左右中央寄せ */
+    padding-inline: 24px;
+}
+
+/* 見出しを中央寄せ（Contact / Login / Register など） */
+.page-title {
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: #7b614a;
+    /* 見本のブラウン */
+    margin: 28px 0 18px;
+}
+
+/* 白いフォームカード（パネル）を中央に固定幅で */
+.form-panel {
+    width: min(960px, calc(100% - 48px));
+    /* 画面が狭い時ははみ出さない */
+    margin: 24px auto;
+    /* ← 左右中央寄せ */
+    padding: 24px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+/* 認証系（login / register など）を少し細めに */
+.form--narrow {
+    width: min(760px, calc(100% - 48px));
+}
+
+/* もし .band が flex になっている場合は左寄りになりやすいので block 指定 */
+.band {
+    display: block;
+}
+
+/* ヘッダー内のレイアウト：タイトルは中央、右上にアクション */
+.site-header .inner {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: center;
+    /* ← 中央寄せ */
+    align-items: center;
+    position: relative;
+    /* 右上アクションを絶対配置するため */
+}
+
+.site-header .brand {
+    /* 見た目はお好みで */
+    font-weight: 700;
+    font-size: 32;
+    letter-spacing: .02em;
+}
+
+.site-header .brand a {
+    font-size: 26px;
+}
+
+/* 右上の login / register を右寄せ固定 */
+.site-header .actions {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ボタンのベース */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-weight: 700;
+    letter-spacing: .05em;
+    line-height: 1;
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+/* ブラウン系のプライマリ（見本寄せ） */
+.btn--primary {
+    background: #8A6B54;
+    /* ブラウン */
+    border-color: #8A6B54;
+    color: #fff;
+}
+
+.btn--primary:hover {
+    background: #7A5E4A;
+    border-color: #7A5E4A;
+}
+
+.btn--primary:active {
+    background: #6D5442;
+    border-color: #6D5442;
+}
+
+/* フォーム内のボタンを中央寄せ */
+.form-panel form .btn {
+    display: block;
+    /* 行要素化 */
+    margin: 18px auto 0;
+    /* 中央寄せ */
+    min-width: 96px;
+    /* 見本っぽく少し幅を持たせる */
+}
+
+/* --- validation --- */
+.form-error {
+    color: #d93025;
+    /* 赤 */
+    margin-top: 6px;
+    font-size: .95rem;
+    line-height: 1.4;
+}
+
+.input.is-invalid .select.is-invalid {
+    border-color: #e4a4a4;
+    /* 薄い赤系 */
+    background: #fff6f6;
+}
+
+/* ラジオ一式の見た目だけエラー時に強調 */
+.field.has-error .inline {
+    outline: 2px solid #d14;
+    border-radius: 6px;
+    padding: 8px;
+    background: #fff9f9;
+}
+
+
+
+
+/* app.css の末尾などに軽く */
+.table th {
+    background: #e7dbcf;
+    /* 見本に近い薄ブラウン */
+    font-weight: 600;
+    width: 160px;
+}
+
+.table td {
+    background: #fff;
+}
+
+/* === 管理画面の横幅を広げる ========================= */
+.admin-wide {
+    max-width: 1200px;
+}
+
+.admin-narrow {
+    max-width: 900px;
+}
+
+.admin-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admin-filters .ml-auto {
+    margin-left: auto;
+}
+
+/* テーブルのカラム幅と折返し */
+.admin-table .w-name {
+    width: 22%;
+}
+
+.admin-table .w-gender {
+    width: 8%;
+    text-align: center;
+}
+
+.admin-table .w-mail {
+    width: 24%;
+}
+
+.admin-table .w-cat {
+    width: 20%;
+}
+
+.admin-table .w-date {
+    width: 12%;
+}
+
+.admin-table .w-action {
+    width: 14%;
+    text-align: right;
+}
+
+.break {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+/* === 数字ページネーション =========================== */
+.pagination {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 14px;
+    justify-content: center;
+}
+
+.pagination .page,
+.pagination .page-nav {
+    display: inline-block;
+    min-width: 34px;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 10px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #e2ddd7;
+    background: #fff;
+    color: #6b5a4d;
+    text-decoration: none;
+}
+
+.pagination .page.is-active {
+    background: #6b5a4d;
+    color: #fff;
+    border-color: #6b5a4d;
+    font-weight: 600;
+}
+
+.pagination .is-disabled {
+    pointer-events: none;
+    opacity: .35;
+}
+
+/* === 詳細テーブルの見やすさ ========================= */
+.admin-detail th {
+    width: 160px;
+    white-space: nowrap;
+}
+
+/* === “浮いてる” モーダル ============================= */
+.admin-dialog::backdrop {
+    background: rgba(0, 0, 0, .25);
+}
+
+.admin-dialog {
+    border: none;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .25), 0 2px 10px rgba(0, 0, 0, .1);
+}
+
+.admin-dialog .dialog-body {
+    position: relative;
+    width: 520px;
+    max-width: calc(100vw - 40px);
+    padding: 22px 22px 18px;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.admin-dialog .dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f3efe8;
+    color: #6b5a4d;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.dialog-title {
+    margin: 0 0 8px;
+    color: #6b5a4d;
+}
+
+.dialog-text {
+    margin: 0 0 18px;
+    color: #6b5a4d;
+    opacity: .9;
+}
+
+/* 既存の色味に合わせた“赤い削除ボタン” */
+.btn.btn--danger {
+    background: #c85c50;
+    border-color: #c85c50;
+    color: #fff;
+}
+
+.btn.btn--danger:hover {
+    filter: brightness(0.95);
+}
+
+/* =========================
+   show（詳細）のオーバーレイ＆カード
+   ========================= */
+
+.show-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 6vh 16px;
+    /* 画面上部に少し余白 */
+    background: rgba(0, 0, 0, .25);
+    /* 半透明の幕で”前に浮いてる”感じ */
+}
+
+.show-card {
+    width: min(900px, 100%);
+    background: #fff;
+    border-radius: 16px;
+    padding: 26px 26px 20px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .25), 0 2px 10px rgba(0, 0, 0, .1);
+    position: relative;
+}
+
+/* 右上の 〇×（一覧へ） */
+.show-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+    text-decoration: none;
+    background: #f3efe8;
+    color: #6b5a4d;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 1px #e2ddd7;
+}
+
+/* タイトル */
+.show-title {
+    margin: 0 0 12px;
+    color: #6b5a4d;
+}
+
+.show-card {
+    text-align: center;
+}
+
+/* ラベル＋値（線/背景なしでフラット） */
+.show-list {
+    display: inkine-grid;
+    row-gap: 10px;
+    margin: 6px auto 16px;
+    text-align: left;
+}
+
+.show-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    column-gap: 16px;
+}
+
+.show-row dt {
+    color: #6b5a4d;
+    opacity: .9;
+    white-space: nowrap;
+}
+
+.show-row dd {
+    margin: 0;
+    word-break: break-word;
+}
+
+/* 右寄せのアクション */
+.actions.right {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 既に定義済みなら不要：赤い削除ボタン */
+.btn.btn--danger {
+    background: #c85c50;
+    border-color: #c85c50;
+    color: #fff;
+}
+
+.btn.btn--danger:hover {
+    filter: brightness(.95);
+}
+
+/* ---- Admin index 用: 横幅を広げる ------------------------- */
+.form--wide {
+    max-width: 1900px;
+}
+
+/* 960→1140px 程度。好みで調整可 */
+
+/* ---- フィルター行（見本に寄せた配置） -------------------- */
+.admin-index .filters {
+    display: grid;
+    grid-template-columns: 2fr 0.8fr 1.2fr 0.9fr auto 1fr;
+    /* keyword / 性別 / 種類 / 日付 / 検索 / 右リンク */
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.admin-index .filters__search {
+    min-width: 88px;
+}
+
+.admin-index .filters__links {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+.admin-index .link-reset,
+.admin-index .link-export {
+    font-size: 0.95rem;
+    text-decoration: underline;
+}
+
+/* ---- テーブルの見た目と列幅 ------------------------------ */
+.table-wrap {
+    overflow-x: auto;
+}
+
+.table--admin {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table--admin th,
+.table--admin td {
+    padding: 12px 14px;
+    vertical-align: middle;
+}
+
+.table--admin thead th {
+    background: #e8dbcf;
+    /* 見本の薄ブラウン系 */
+    color: #5a4737;
+    font-weight: 700;
+}
+
+.table--admin tbody tr:nth-child(odd) {
+    background: #faf6f2;
+}
+
+.table--admin tbody tr:hover {
+    background: #f2ebe5;
+}
+
+.table--admin th:nth-child(1),
+.table--admin td:nth-child(1) {
+    width: 20%;
+}
+
+/* 名前 */
+.table--admin th:nth-child(2),
+.table--admin td:nth-child(2) {
+    width: 10%;
+}
+
+/* 性別 */
+.table--admin th:nth-child(3),
+.table--admin td:nth-child(3) {
+    width: 30%;
+}
+
+/* メール */
+.table--admin th:nth-child(4),
+.table--admin td:nth-child(4) {
+    width: 28%;
+}
+
+/* 種類 */
+.table--admin .th--action,
+.table--admin .td--action {
+    width: 12%;
+    text-align: right;
+}
+
+.table--admin .td--email {
+    word-break: break-all;
+}
+
+/* ---- ページネーション中央寄せ ----------------------------- */
+.pagination-centered nav ul {
+    /* Laravel の標準 pagination を中央寄せ */
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0;
+}
+
+.pagination-centered nav li a,
+.pagination-centered nav li span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid #d8c8b8;
+    border-radius: 6px;
+    background: #fff;
+    color: #5a4737;
+    font-weight: 600;
+}
+
+.pagination-centered nav li span[aria-current="page"] {
+    background: #8b6b52;
+    color: #fff;
+    border-color: #8b6b52;
+}
+
+.pagination-centered nav svg {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* ---- スマホ（幅 < 768px）は縦並び ------------------------- */
+/* @media (max-width: 768px) {
+    .admin-index .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-index .filters__links {
+        justify-content: flex-start;
+    }
+} */
+
+/* 既存の btn と相性が悪ければ !important で押さえ込み */
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.btn--sm {
+    padding: 6px 10px;
+    font-size: .92rem;
+    border-radius: 7px;
+}
+
+.btn--ghost {
+    border: 1px solid #b79374;
+    color: #7a5e46;
+    background: #fff;
+}
+
+.btn--ghost:hover {
+    background: #f7efe7;
+}
+
+.admin-index .filters__links {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    /* 右端に寄せる */
+    align-items: center;
+}
+
+/* ===========================
+   Admin: show モーダル（スコープ済み）
+   =========================== */
+
+/* 画面全体の暗幕 */
+.show-overlay{
+  position: fixed;
+  inset: 0;                      /* top/right/bottom/left:0 の略 */
+  background: rgba(0,0,0,.35);
+  display: grid;
+  place-items: center;           /* 中央寄せ */
+  padding: 24px;                 /* 端に貼り付かないよう余白 */
+  z-index: 1100;
+}
+
+/* 浮いたカード本体 */
+.show-card{
+  position: relative;
+  width: min(960px, calc(100vw - 48px));  /* 最大幅＋画面端の余白 */
+  max-height: min(86vh, 100%);            /* 画面からはみ出さない */
+  overflow: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  padding: 28px 32px;
+}
+
+/* 右上の ×（＝一覧に戻る） */
+.show-close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: #7a5b46;
+  background: #f2eae4;
+  border: 1px solid #e3d8cf;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  transition: background .2s ease, transform .05s ease;
+}
+.show-close:hover{ background:#eadfd7; }
+.show-close:active{ transform: translateY(1px); }
+
+/* 値の一覧（2カラムのグリッド） */
+.show-list{
+  display: grid;
+  grid-template-columns: 10rem 1fr;   /* 左：ラベル 右：値 */
+  column-gap: 20px;
+  row-gap: 12px;
+  align-items: start;
+  margin: 8px 0 4px;
+  padding: 0;
+}
+
+/* 各行（div の殻自体は表示せず dt/dd だけをグリッドに載せる） */
+.show-row{ display: contents; }
+
+/* ラベル */
+.show-list dt{
+  margin: 0;
+  font-weight: 600;
+  color: #7a5b46;
+  white-space: nowrap;              /* ラベルの縦割れ防止 */
+}
+
+/* 値 */
+.show-list dd{
+  margin: 0;
+  line-height: 1.8;
+  word-break: normal !important;    /* もし全体で break-all していたら打ち消す */
+  overflow-wrap: break-word;        /* 長い英数字は適切に折り返す */
+}
+
+/* 値を強制的に折り返したいときのヘルパー（HTML に class="break" と付けている） */
+.show-list dd.break{
+  overflow-wrap: anywhere;
+}
+
+/* ボタン行（削除など）を中央寄せに */
+.show-actions{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* 画面幅が狭いときは左カラムを少し詰める */
+@media (max-width: 768px){
+  .show-card{ width: min(680px, calc(100vw - 24px)); padding: 20px; }
+  .show-list{ grid-template-columns: 8rem 1fr; column-gap: 16px; }
+}
+/* ===== PATCH ZONE: Contact page =============================== */
+.contact-page .field{
+  display: grid;
+  grid-template-columns: 12rem 1fr;  /* 左ラベル／右入力 */
+  align-items: start;
+  gap: 10px 16px;
+  margin: 10px 0;
+}
+.contact-page .field > label{
+  margin: 0;
+  white-space: nowrap;
+  color: #7a5b46;
+  font-weight: 600;
+}
+
+/* テキスト系の高さと幅を統一して“横長に見える”ように */
+.contact-page .input,
+.contact-page select,
+.contact-page textarea{
+  width: min(720px, 100%);   /* 画面幅に応じて自然に横に広がる */
+  max-width: 100%;
+}
+
+/* ラジオを横並びに */
+.contact-page .radios,
+.contact-page .radio-row{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contact-page input[type="radio"]{ margin-right: 6px; }
+
+/* カウンタとエラー色 */
+#detailCount{ margin-top: 4px; font-size: .9rem; color: #8b7a6e; }
+#detailCount.over{ color: #c4514f; }
+.form-error{ color:#c4514f; margin-top:6px; }
+.is-invalid{ border-color:#c4514f; }
+
+/* ===== PATCH ZONE: Admin index =============================== */
+.admin-index .table{
+  table-layout: fixed;
+  width: 100%;
+}
+.admin-index .table th,
+.admin-index .table td{
+  padding: 8px 10px;      /* 行をコンパクトにして“横長感”を出す */
+  line-height: 1.3;
+  vertical-align: middle;
+}
+
+/* 列幅と折返し */
+.admin-index .table th:nth-child(1),
+.admin-index .table td:nth-child(1){ width: 20%; white-space: nowrap; } /* 氏名 */
+.admin-index .table th:nth-child(2),
+.admin-index .table td:nth-child(2){ width: 10%; white-space: nowrap; } /* 性別 */
+.admin-index .table th:nth-child(3),
+.admin-index .table td:nth-child(3){ width: 30%; }                       /* メール */
+.admin-index .table th:nth-child(4),
+.admin-index .table td:nth-child(4){ width: 28%; }                       /* 種別 */
+.admin-index .table th:last-child,
+.admin-index .table td:last-child{
+  width: 12%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* メールは省略表示＋ツールチップで全体確認 */
+.admin-index .table td:nth-child(3){
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.admin-index .table td:nth-child(3)[title=""]::after{ content: ""; } /* タイトル無でもOK */
+
+.admin-index .btn.btn--sm{ padding: 6px 10px; height: 32px; line-height: 32px; }
